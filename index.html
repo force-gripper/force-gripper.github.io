@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Universal Low-Cost Force-Controlled Gripper for Learning Delicate Object Grasping">
+        content="Learning Force-Regulated Manipulation with a Low-Cost Tactile-Force-Controlled Gripper">
   <meta name="keywords" content="Low-Cost">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Universal Low-Cost Force-Controlled Gripper for Learning Delicate Object Grasping</title>
+  <title>Learning Force-Regulated Manipulation with a Low-Cost Tactile-Force-Controlled Gripper</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -45,16 +45,16 @@
 <body>
 
 <div class="full-page-image">
-  <video id="bg-video" autoplay loop muted playsinline>
+  <video id="bg-video" autoplay muted playsinline>
       <source src="static/videos/demo_individial_control.mp4" type="video/mp4">
   </video>
   <div class="overlay"></div>
   <div class="first-page-title" style="padding: 0 20px">
     <div class="is-size-1" id="first-page-main-title-text">
-    Universal Low-Cost Force-Controlled Gripper for Learning Delicate Object Grasping
+      Learning Force-Regulated Manipulation with a Low-Cost Tactile-Force-Controlled Gripper
     </div>
     <div class="is-size-4" id="first-page-sub-title-text">
-    A versatile and affordable force-controlled gripper designed for precise manipulation tasks
+    A force-controlled gripper designed for precise force-regulated manipulation tasks
     </div>
   </div>
 </div>
@@ -64,7 +64,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Universal Low-Cost Force-Controlled Gripper for Learning Delicate Object Grasping</h1>
+          <h1 class="title is-1 publication-title">Learning Force-Regulated Manipulation with a Low-Cost Tactile-Force-Controlled Gripper</h1>
           <div class="is-size-5 publication-authors">
              <span class="author-block">
               <a href="https://scholar.google.com/citations?user=sIY8FtgAAAAJ&hl=en">Xuhui Kang*</a><sup>1</sup>,</span>
@@ -72,8 +72,10 @@
               <a href="https://tongxuan259.github.io">Tongxuan Tian*</a><sup>1</sup>,</span>
             <span class="author-block">
               <a href="https://scholar.google.com/citations?user=sIY8FtgAAAAJ&hl=en">Sung-Wook Lee</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="https://binghao-huang.github.io/">Binghao Huang</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://binghao-huang.github.io/">Binghao Huang</a><sup>2</sup>,</span>
+              <span class="author-block">
+              <a href="https://yunzhuli.github.io/">Yunzhu Li</a><sup>2</sup>,</span>
             <span class="author-block">
               <a href="https://yenlingkuo.com/">Yen-Ling Kuo</a><sup>1</sup>,
             </span>
@@ -82,6 +84,11 @@
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>University of Virginia</span>
             <span class="author-block"><sup>2</sup>Columbia University</span>
+          </div>
+
+          <div class="university-logos" style="display: flex; justify-content: center; align-items: center; gap: 2rem; margin-top: 1rem;">
+            <img src="./static/images/uva_logo.png" alt="University of Virginia" style="height: 60px;">
+            <img src="./static/images/columbia_logo.svg" alt="Columbia University" style="height: 40px;">
           </div>
 
           <div class="column has-text-centered">
@@ -106,6 +113,17 @@
                   </span>
                   <span>Code (Coming Soon)</span>
                   </a>
+              </span>
+
+              <span class="link-block">
+                <a href="https://github.com/Shua-Kang/force_gripper_hardware"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Hardware Guide</span>
+                  </a>
+              </span>
             </div>
 
           </div>
@@ -117,175 +135,14 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3 has-text-centered">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Delicate object grasping benefits from precise force regulation and rapid reactions to physical contact, which are difficult to achieve with conventional width-based gripper control and vision-only policies.
-            In this work, we develop a low-cost force-controlled parallel-jaw gripper driven by a timing-belt transmission and equipped with tactile sensing at the fingertips.
-            To support learning-based force control, we further design a custom teleoperation device that captures human-applied grasping force and directly maps it to the robot gripper, enabling the collection of force-aware demonstrations.
-            Learning force control for grasping is challenging due to its contact-dependent and high-frequency.
-            We therefore introduce RETAF (Reactive Tactile Adaptation of Force), a lightweight force policy that operates alongside a pose-prediction base policy.
-            Using our gripper and data collection device, we evaluate RETAF on multiple delicate manipulation tasks, including tofu grasping, chip picking, and cherry tomato manipulation.
-            Experimental results show that direct force control consistently outperforms width control, tactile sensing is essential for achieving stable grasps, and RETAF improves performance across different base pose-prediction policies.
-            Together, our gripper design and reactive force control framework provide an effective hardware–policy combination for advancing learning-based delicate object grasping.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="has-text-centered">
-      <h2 class="title is-3">Task Demonstrations</h2>
-      <p class="subtitle is-5">Four delicate manipulation tasks enabled by reactive force control.</p>
-    </div>
-    <div class="video-gallery task-video-gallery">
-      <figure>
-        <div class="video-frame">
-          <video controls playsinline>
-            <source src="./static/videos/task/tofu_reactive.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <figcaption>Tofu grasping with compliant force regulation.</figcaption>
-      </figure>
-      <figure>
-        <div class="video-frame">
-          <video controls playsinline>
-            <source src="./static/videos/task/potato_chip_reactive.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <figcaption>Potato chip picking without fracture.</figcaption>
-      </figure>
-      <figure>
-        <div class="video-frame">
-          <video controls playsinline>
-            <source src="./static/videos/task/tomato_reactive.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <figcaption>Cherry tomato manipulation with tactile feedback.</figcaption>
-      </figure>
-      <figure>
-        <div class="video-frame">
-          <video controls playsinline>
-            <source src="./static/videos/task/liquid-force-good-2.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <figcaption>Pipette liquid handling with force-adaptive control.</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="has-text-centered">
-      <h2 class="title is-3">Policy Comparison</h2>
-      <p class="subtitle is-5">RETAF vs DP w/ width across four manipulation tasks.</p>
-    </div>
-    <div class="columns is-centered comparison-header">
-      <div class="column is-half has-text-centered">
-        <h3 class="title is-5">RETAF</h3>
-      </div>
-      <div class="column is-half has-text-centered">
-        <h3 class="title is-5">DP w/ width</h3>
-      </div>
-    </div>
-    <div class="comparison-grid comparison-videos">
-      <div class="comparison-row">
-        <h4 class="title is-5">Tofu Grasping</h4>
-        <div class="columns is-variable is-4 is-multiline">
-          <div class="column is-half">
-            <div class="video-frame">
-              <video controls playsinline>
-                <source src="./static/videos/comparison/tofu/tofu_reactive.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-          <div class="column is-half">
-            <div class="video-frame">
-              <video controls playsinline>
-                <source src="./static/videos/comparison/tofu/tofu_width.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="comparison-row">
-        <h4 class="title is-5">Potato Chip Picking</h4>
-        <div class="columns is-variable is-4 is-multiline">
-          <div class="column is-half">
-            <div class="video-frame">
-              <video controls playsinline>
-                <source src="./static/videos/comparison/chips/potato_chip_reactive.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-          <div class="column is-half">
-            <div class="video-frame">
-              <video controls playsinline>
-                <source src="./static/videos/comparison/chips/potato_chip_width.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="comparison-row">
-        <h4 class="title is-5">Cherry Tomato Manipulation</h4>
-        <div class="columns is-variable is-4 is-multiline">
-          <div class="column is-half">
-            <div class="video-frame">
-              <video controls playsinline>
-                <source src="./static/videos/comparison/tomato/tomato_reactive.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-          <div class="column is-half">
-            <div class="video-frame">
-              <video controls playsinline>
-                <source src="./static/videos/comparison/tomato/tomato_width.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="comparison-row">
-        <h4 class="title is-5">Pipette Liquid Transfer</h4>
-        <div class="columns is-variable is-4 is-multiline">
-          <div class="column is-half">
-            <div class="video-frame">
-              <video controls playsinline>
-                <source src="./static/videos/comparison/liquid/liquid-force-good-2.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-          <div class="column is-half">
-            <div class="video-frame">
-              <video controls playsinline>
-                <source src="./static/videos/comparison/liquid/force-bad.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-        </div>
-      </div>
+    <h2 class="title is-3 has-text-centered">Abstract</h2>
+    <div class="content has-text-justified" style="max-width: 800px; margin: 0 auto;">
+      <p>
+        Humans manipulate everyday force-sensitive objects by regulating contact force through tactile feedback, especially during short physical contact. To study and utilize this capability in robot learning, we design a low-cost force-controlled parallel-jaw gripper with tactile sensing, together with a teleoperation device that records human-applied grasping force.
+Using this system, we find that position or open–close control relies on indirect proxies of contact force and lacks robustness, while directly learning force control with standard low-frequency policies remains challenging due to the reactive and contact-dependent nature of grasping force. We therefore propose RETAF, a reactive tactile force adaptation framework that decouples grasping force control from arm pose prediction.
+RETAF regulates force at high frequency using wrist-view images and tactile feedback, while a base policy predicts end-effector motion and gripper open/close actions. Experiments on five real-world everyday manipulation tasks show that force control outperforms position-based control, tactile feedback is essential, and RETAF consistently improves grasp stability across different base policies.
+Overall, our results show that force control is critical for everyday force-sensitive manipulation and must be learned in a reactive manner to handle contact-dependent interactions.
+      </p>
     </div>
   </div>
 </section>
@@ -293,21 +150,15 @@
 <!-- Added Method Overview Section -->
 <section class="section">
   <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Hardware Design</h2>
-        <div class="content has-text-justified">
-          
-          <div class="has-text-centered">
-            <img src="./static/images/overview.png" alt="Gripper Overview">
-          </div>
-        </div>
+    <h2 class="title is-3 has-text-centered">Hardware Design</h2>
+    <div class="content has-text-justified" style="max-width: 800px; margin: 0 auto;">
+      <div class="has-text-centered">
+        <img src="./static/images/overview.png" alt="Gripper Overview">
+        <p><a href="https://github.com/Shua-Kang/force_gripper_hardware/blob/main/BOM.md" target="_blank">Bill of Materials (BOM)</a></p>
       </div>
     </div>
   </div>
 </section>
-
-
 
 <section class="section">
   <div class="container is-max-desktop">
@@ -359,7 +210,7 @@
 <section class="section">
   <div class="container is-max-desktop">
     <div class="has-text-centered">
-      <h2 class="title is-3">Case Studies</h2>
+      <h2 class="title is-3">Teleoperation Demo</h2>
       <p class="subtitle is-5">Real-world deployments that highlight how the gripper handles nuanced manipulation tasks.</p>
     </div>
     <div class="video-gallery">
@@ -370,7 +221,7 @@
             Your browser does not support the video tag.
           </video>
         </div>
-        <figcaption>Case Study 1: Full teleoperation workflow captured end-to-end.</figcaption>
+        <figcaption>Teleoperation demo 1: Full teleoperation workflow captured end-to-end.</figcaption>
       </figure>
       <figure>
         <div class="video-frame">
@@ -379,14 +230,164 @@
             Your browser does not support the video tag.
           </video>
         </div>
-        <figcaption>Case Study 2: Extended manipulation sequence in a challenging setup.</figcaption>
+        <figcaption>Teleoperation demo 2: Extended manipulation sequence in a challenging setup.</figcaption>
       </figure>
     </div>
   </div>
 </section>
 
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered">
+      <h2 class="title is-3">Policy Comparison</h2>
+      <p class="subtitle is-5">DP w/ width vs DP w/ force vs RETAF (Ours) across four manipulation tasks.</p>
+    </div>
+    <div class="columns is-centered comparison-header">
+      <div class="column is-one-third has-text-centered">
+        <h3 class="title is-5">DP w/ width</h3>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <h3 class="title is-5">DP w/ force</h3>
+      </div>
+      <div class="column is-one-third has-text-centered">
+        <h3 class="title is-5">RETAF (Ours)</h3>
+      </div>
+    </div>
+    <div class="comparison-grid comparison-videos">
+      <div class="comparison-row">
+        <h4 class="title is-5">Tofu Grasping</h4>
+        <div class="columns is-variable is-4 is-multiline">
+          <div class="column is-one-third">
+            <div class="video-frame">
+              <video controls playsinline>
+                <source src="./static/videos/comparison/tofu/width.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="has-text-centered method-label">DP w/ width</p>
+          </div>
+          <div class="column is-one-third">
+            <div class="video-frame">
+              <video controls playsinline>
+                <source src="./static/videos/comparison/tofu/force.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="has-text-centered method-label">DP w/ force</p>
+          </div>
+          <div class="column is-one-third">
+            <div class="video-frame">
+              <video controls playsinline>
+                <source src="./static/videos/comparison/tofu/reactive.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="has-text-centered method-label">RETAF (Ours)</p>
+          </div>
+        </div>
+      </div>
 
+      <div class="comparison-row">
+        <h4 class="title is-5">Potato Chip Picking</h4>
+        <div class="columns is-variable is-4 is-multiline">
+          <div class="column is-one-third">
+            <div class="video-frame">
+              <video controls playsinline>
+                <source src="./static/videos/comparison/chips/width.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="has-text-centered method-label">DP w/ width</p>
+          </div>
+          <div class="column is-one-third">
+            <div class="video-frame">
+              <video controls playsinline>
+                <source src="./static/videos/comparison/chips/force.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="has-text-centered method-label">DP w/ force</p>
+          </div>
+          <div class="column is-one-third">
+            <div class="video-frame">
+              <video controls playsinline>
+                <source src="./static/videos/comparison/chips/reactive.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="has-text-centered method-label">RETAF (Ours)</p>
+          </div>
+        </div>
+      </div>
 
+      <div class="comparison-row">
+        <h4 class="title is-5">Cherry Tomato Picking</h4>
+        <div class="columns is-variable is-4 is-multiline">
+          <div class="column is-one-third">
+            <div class="video-frame">
+              <video controls playsinline>
+                <source src="./static/videos/comparison/tomato/width.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="has-text-centered method-label">DP w/ width</p>
+          </div>
+          <div class="column is-one-third">
+            <div class="video-frame">
+              <video controls playsinline>
+                <source src="./static/videos/comparison/tomato/force.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="has-text-centered method-label">DP w/ force</p>
+          </div>
+          <div class="column is-one-third">
+            <div class="video-frame">
+              <video controls playsinline>
+                <source src="./static/videos/comparison/tomato/reactive.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="has-text-centered method-label">RETAF (Ours)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparison-row">
+        <h4 class="title is-5">Liquid Transfer</h4>
+        <div class="columns is-variable is-4 is-multiline">
+          <div class="column is-one-third">
+            <div class="video-frame">
+              <video controls playsinline>
+                <source src="./static/videos/comparison/liquid/width.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="has-text-centered method-label">DP w/ width</p>
+          </div>
+          <div class="column is-one-third">
+            <div class="video-frame">
+              <video controls playsinline>
+                <source src="./static/videos/comparison/liquid/force.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="has-text-centered method-label">DP w/ force</p>
+          </div>
+          <div class="column is-one-third">
+            <div class="video-frame">
+              <video controls playsinline>
+                <source src="./static/videos/comparison/liquid/reactive.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="has-text-centered method-label">RETAF (Ours)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Added Method Overview Section -->
 <section class="section">
