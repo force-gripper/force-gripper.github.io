@@ -82,8 +82,17 @@
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>University of Virginia</span>
+            <span class="author-block"><sup>1</sup>University of Virginia,</span>
             <span class="author-block"><sup>2</sup>Columbia University</span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>*</sup>Equal contribution</span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><tt>{xuhui, nua3jz, ylkuo}@virginia.edu</tt>,</span>
+            <span class="author-block"><tt>{binghao.huang, yunzhu.li}@columbia.edu</tt></span>
           </div>
 
           <div class="university-logos" style="display: flex; justify-content: center; align-items: center; gap: 2rem; margin-top: 1rem;">
@@ -133,15 +142,39 @@
   </div>
 </section>
 
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/teaser.pdf"
+           class="interpolation-image"
+           alt="Teaser image."/>
+      <!-- <h2 class="subtitle has-text-centered">
+        TF-Gripper is a low-cost force-controlled gripper that integrates tactile sensing as feedback, enabling precise force regulation for delicate manipulation tasks.
+      </h2> -->
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Abstract</h2>
     <div class="content has-text-justified">
       <p>
-        Humans manipulate everyday force-sensitive objects by regulating contact force through tactile feedback, especially during short physical contact. To study and utilize this capability in robot learning, we design a low-cost force-controlled parallel-jaw gripper with tactile sensing, together with a teleoperation device that records human-applied grasping force.
-Using this system, we find that position or open–close control relies on indirect proxies of contact force and lacks robustness, while directly learning force control with standard low-frequency policies remains challenging due to the reactive and contact-dependent nature of grasping force. We therefore propose RETAF, a reactive tactile force adaptation framework that decouples grasping force control from arm pose prediction.
-RETAF regulates force at high frequency using wrist-view images and tactile feedback, while a base policy predicts end-effector motion and gripper open/close actions. Experiments on five real-world everyday manipulation tasks show that force control outperforms position-based control, tactile feedback is essential, and RETAF consistently improves grasp stability across different base policies.
-Overall, our results show that force control is critical for everyday force-sensitive manipulation and must be learned in a reactive manner to handle contact-dependent interactions.
+        Successfully manipulating many everyday objects, such as potato chips, requires precise force regulation.
+Failure to modulate force can lead to task failure or irreversible damage to the objects.
+Humans can precisely achieve this by adapting force from tactile feedback, even within a short period of physical contact.
+We aim to give robots this capability.
+However, commercial grippers exhibit high cost or high minimum force, making them unsuitable for studying force-controlled policy learning with everyday force-sensitive objects.
+We introduce TF-Gripper, a low-cost (~\$150) force-controlled parallel-jaw gripper that integrates tactile sensing as feedback.
+It has an effective force range of 0.45--45~N and is compatible with different robot arms.
+Additionally, we designed a teleoperation device paired with TF-Gripper to record human-applied grasping forces.
+While we can train standard low-frequency policies with the collected force data, achieving reliable performance remains challenging due to the reactive and contact-dependent nature of force-regulated manipulation.
+To overcome this, we propose RETAF (REactive Tactile Adaptation of Force), a framework that decouples grasping force control from arm pose prediction.
+RETAF regulates force at high frequency using wrist images and tactile feedback, while a base policy predicts end-effector pose and gripper open/close action.
+We evaluate TF-Gripper and RETAF across five real-world tasks requiring precise force regulation.
+Our results show that, compared to position control, direct force control with TF-Gripper improves grasp stability and overall task performance.
+We further show that tactile feedback is essential for force regulation, and that RETAF consistently outperforms baselines, and can be integrated with various base policies.
+We hope this work opens a path for scaling the learning of force-controlled policies in robotic manipulation.
       </p>
     </div>
   </div>
