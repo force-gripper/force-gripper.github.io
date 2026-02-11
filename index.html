@@ -105,34 +105,36 @@
               <!-- PDF Link. -->
 
               <span class="link-block">
-                <a href=""
+                <a href="https://arxiv.org/abs/2602.10013"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
                   </span>
-                  <span>arXiv (Coming Soon)</span>
+                  <span>arXiv</span>
                 </a>
               </span>
       
-              <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code (Coming Soon)</span>
-                  </a>
-              </span>
-
               <span class="link-block">
                 <a href="https://github.com/Shua-Kang/force_gripper_hardware"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Hardware Guide</span>
+                  <span>Hardware Guide and Code</span>
                   </a>
               </span>
+
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Method Code (Coming Soon)</span>
+                  </a>
+              </span>
+
+              
             </div>
 
           </div>
@@ -165,8 +167,8 @@ Failure to modulate force can lead to task failure or irreversible damage to the
 Humans can precisely achieve this by adapting force from tactile feedback, even within a short period of physical contact.
 We aim to give robots this capability.
 However, commercial grippers exhibit high cost or high minimum force, making them unsuitable for studying force-controlled policy learning with everyday force-sensitive objects.
-We introduce TF-Gripper, a low-cost (~\$150) force-controlled parallel-jaw gripper that integrates tactile sensing as feedback.
-It has an effective force range of 0.45--45~N and is compatible with different robot arms.
+We introduce TF-Gripper, a low-cost (~$150) force-controlled parallel-jaw gripper that integrates tactile sensing as feedback.
+It has an effective force range of 0.45-45 N and is compatible with different robot arms.
 Additionally, we designed a teleoperation device paired with TF-Gripper to record human-applied grasping forces.
 While we can train standard low-frequency policies with the collected force data, achieving reliable performance remains challenging due to the reactive and contact-dependent nature of force-regulated manipulation.
 To overcome this, we propose RETAF (REactive Tactile Adaptation of Force), a framework that decouples grasping force control from arm pose prediction.
@@ -422,26 +424,30 @@ We hope this work opens a path for scaling the learning of force-controlled poli
   </div>
 </section>
 
-<!-- Added Method Overview Section -->
+
+
+
+
+
+
 <section class="section">
   <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
+    <div class="columns is-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">More details to be updated. Stay tuned!</h2>
+        <h2 class="title is-3 has-text-centered">BibTeX</h2>
+        <pre class="has-text-left" style="background: #f5f5f5; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>@misc{kang2026learningforceregulatedmanipulationlowcost,
+      title={Learning Force-Regulated Manipulation with a Low-Cost Tactile-Force-Controlled Gripper}, 
+      author={Xuhui Kang and Tongxuan Tian and Sung-Wook Lee and Binghao Huang and Yunzhu Li and Yen-Ling Kuo},
+      year={2026},
+      eprint={2602.10013},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2602.10013}, 
+}</code></pre>
       </div>
     </div>
   </div>
 </section>
-
-
-
-
-
-
-
-
-
-
 
 <footer class="footer">
     <div class="container">
