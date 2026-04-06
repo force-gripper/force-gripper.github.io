@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam Countdown</title>
+    <style>
+      :root {
+        --bg-1: #f8f4ef;
+        --bg-2: #e8eef5;
+        --card: #ffffffcc;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --accent: #0f766e;
+        --accent-2: #0ea5a4;
+        --danger: #b91c1c;
+        --ok: #166534;
+        --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Avenir Next", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 10% 20%, #fef3c7 0%, transparent 40%),
+          radial-gradient(circle at 90% 10%, #bae6fd 0%, transparent 35%),
+          linear-gradient(135deg, var(--bg-1), var(--bg-2));
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+
+      .panel {
+        width: min(760px, 100%);
+        background: var(--card);
+        backdrop-filter: blur(8px);
+        border: 1px solid #ffffff;
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .header {
+        padding: 26px 24px 12px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+        letter-spacing: 0.01em;
+      }
+
+      .subtitle {
+        margin: 8px 0 0;
+        color: var(--muted);
+      }
+
+      .content {
+        padding: 14px 24px 26px;
+        display: grid;
+        gap: 18px;
+      }
+
+      .controls {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+      }
+
+      .controls.hidden {
+        display: none;
+      }
+
+      input[type="datetime-local"] {
+        width: 100%;
+        border: 1px solid #d1d5db;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 1rem;
+        background: #fff;
+      }
+
+      button {
+        border: none;
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #fff;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        cursor: pointer;
+      }
+
+      button:hover {
+        filter: brightness(1.05);
+      }
+
+      .countdown-wrap {
+        border: 1px solid #dbe3ef;
+        border-radius: 16px;
+        padding: 16px;
+        background: #fff;
+      }
+
+      .countdown-label {
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+      }
+
+      .countdown {
+        font-variant-numeric: tabular-nums;
+        font-size: clamp(1.4rem, 4.4vw, 2.2rem);
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .meta {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .progress-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-size: 0.95rem;
+      }
+
+      .progress-bar {
+        margin-top: 8px;
+        width: 100%;
+        height: 24px;
+        border-radius: 999px;
+        background: #e5e7eb;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #14b8a6, #0ea5e9);
+        transition: width 0.35s ease;
+      }
+
+      .notes {
+        border-left: 4px solid #f59e0b;
+        background: #fffbeb;
+        border-radius: 12px;
+        padding: 14px;
+      }
+
+      .notes h2 {
+        margin: 0 0 10px;
+        font-size: 1.2rem;
+      }
+
+      .notes p {
+        margin: 0;
+        line-height: 1.55;
+        font-size: 1.08rem;
+      }
+
+      .status {
+        min-height: 1.2em;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .status.error {
+        color: var(--danger);
+      }
+
+      .status.ok {
+        color: var(--ok);
+      }
+
+      @media (max-width: 640px) {
+        .controls {
+          grid-template-columns: 1fr;
+        }
+
+        button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="panel">
+      <section class="header">
+        <h1>Exam Countdown</h1>
+        <p class="subtitle">Enter the exam deadline and click Start to see the live countdown and progress.</p>
+      </section>
+
+      <section class="content">
+        <div id="controls" class="controls">
+          <input id="deadlineInput" type="datetime-local" aria-label="Exam deadline" value="2026-04-07T11:55" />
+          <button id="startBtn" type="button">Start Countdown</button>
+        </div>
+
+        <div id="status" class="status"></div>
+
+        <div class="countdown-wrap">
+          <div class="countdown-label">Time remaining until the deadline</div>
+          <div id="countdown" class="countdown">--:--:--</div>
+          <div id="meta" class="meta">Not started</div>
+        </div>
+
+        <div>
+          <div class="progress-title">
+            <span>Exam time progress</span>
+            <strong id="progressText">0%</strong>
+          </div>
+          <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="notes">
+          <h2>Reminders</h2>
+          <p>
+            Please keep all electronics powered off and put away, including phones and alarms.<br /><br />
+            If you need to use the restroom, please leave your phone at the front of the classroom before you go.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        const input = document.getElementById('deadlineInput');
+        const startBtn = document.getElementById('startBtn');
+        const controlsEl = document.getElementById('controls');
+        const statusEl = document.getElementById('status');
+        const countdownEl = document.getElementById('countdown');
+        const metaEl = document.getElementById('meta');
+        const progressFillEl = document.getElementById('progressFill');
+        const progressTextEl = document.getElementById('progressText');
+        const progressBarEl = document.querySelector('.progress-bar');
+
+        let timerId = null;
+        let startTime = null;
+        let deadlineTime = null;
+
+        function formatDuration(ms) {
+          const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+          const days = Math.floor(totalSeconds / 86400);
+          const hours = Math.floor((totalSeconds % 86400) / 3600);
+          const minutes = Math.floor((totalSeconds % 3600) / 60);
+          const seconds = totalSeconds % 60;
+
+          if (days > 0) {
+            return `${days}d ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+          }
+
+          return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        function setStatus(text, kind) {
+          statusEl.textContent = text || '';
+          statusEl.classList.remove('error', 'ok');
+          if (kind) {
+            statusEl.classList.add(kind);
+          }
+        }
+
+        function updateUI() {
+          if (!startTime || !deadlineTime) {
+            return;
+          }
+
+          const now = Date.now();
+          const remaining = deadlineTime - now;
+          const total = deadlineTime - startTime;
+
+          if (remaining <= 0) {
+            countdownEl.textContent = '00:00:00';
+            metaEl.textContent = 'The exam is over';
+            progressFillEl.style.width = '100%';
+            progressTextEl.textContent = '100%';
+            progressBarEl.setAttribute('aria-valuenow', '100');
+            setStatus('The deadline has been reached.', 'ok');
+            if (timerId) {
+              clearInterval(timerId);
+              timerId = null;
+            }
+            return;
+          }
+
+          countdownEl.textContent = formatDuration(remaining);
+          const progress = total > 0 ? Math.min(100, Math.max(0, ((now - startTime) / total) * 100)) : 0;
+          const progressRounded = Math.round(progress * 10) / 10;
+          progressFillEl.style.width = `${progressRounded}%`;
+          progressTextEl.textContent = `${progressRounded}%`;
+          progressBarEl.setAttribute('aria-valuenow', String(progressRounded));
+
+          const deadlineStr = new Date(deadlineTime).toLocaleString();
+          metaEl.textContent = `Deadline: ${deadlineStr}`;
+        }
+
+        function startCountdown() {
+          const value = input.value;
+          if (!value) {
+            setStatus('Please enter the exam deadline first.', 'error');
+            return;
+          }
+
+          const parsed = new Date(value).getTime();
+          if (Number.isNaN(parsed)) {
+            setStatus('Invalid date/time format. Please try again.', 'error');
+            return;
+          }
+
+          const now = Date.now();
+          if (parsed <= now) {
+            setStatus('The deadline must be later than the current time.', 'error');
+            return;
+          }
+
+          startTime = now;
+          deadlineTime = parsed;
+
+          if (timerId) {
+            clearInterval(timerId);
+          }
+
+          controlsEl.classList.add('hidden');
+          setStatus('');
+          updateUI();
+          timerId = setInterval(updateUI, 1000);
+        }
+
+        startBtn.addEventListener('click', startCountdown);
+      })();
+    </script>
+  </body>
+</html>
