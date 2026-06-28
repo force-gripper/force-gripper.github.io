@@ -297,20 +297,93 @@ We hope this work opens a path for scaling the learning of force-controlled poli
   <div class="container is-max-desktop">
     <div class="has-text-centered">
       <h2 class="title is-3">Policy Comparison</h2>
-      <p class="subtitle is-5">DP w/ width vs DP w/ force vs RETAF (Ours) across four manipulation tasks.</p>
     </div>
-    <div class="columns is-centered comparison-header">
-      <div class="column is-one-third has-text-centered">
-        <h3 class="title is-5">DP w/ width</h3>
+
+    <!-- Sub-section: Generalization -->
+    <div class="comparison-subsection">
+      <div class="has-text-centered">
+        <h3 class="title is-4">Generalization</h3>
+        <p class="subtitle is-6">RETAF generalizes to out-of-distribution objects and transfers across robot arms.</p>
       </div>
-      <div class="column is-one-third has-text-centered">
-        <h3 class="title is-5">DP w/ force</h3>
+
+      <div class="comparison-row">
+        <h4 class="title is-5">Generalization to Unseen Potato Chips</h4>
+        <figure class="generalization-figure">
+          <img src="./static/images/potatochips_ID_OOD.png"
+               alt="Six potato chip variants: in-distribution chips A-D and out-of-distribution chips E-F">
+          <figcaption>
+            Six potato chip variants used to evaluate generalization. Chips <strong>A&ndash;D</strong> are
+            in-distribution (seen during training), while chips <strong>E&ndash;F</strong> are held-out
+            out-of-distribution instances with unseen shapes, sizes, and surface properties.
+          </figcaption>
+        </figure>
+        <div class="comparison-videos">
+          <div class="columns is-centered">
+            <div class="column is-two-thirds">
+              <div class="video-frame">
+                <video controls playsinline>
+                  <source src="./static/videos_2/DP_Force_Control_IN_OOD.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <p class="has-text-centered method-label">DP w/ Tactile (Force) &mdash; Baseline (Failure)</p>
+            </div>
+          </div>
+          <div class="columns is-centered">
+            <div class="column is-two-thirds">
+              <div class="video-frame">
+                <video controls playsinline>
+                  <source src="./static/videos_2/RETAF_Force_Control_IN_OOD.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <p class="has-text-centered method-label">RETAF (Ours) &mdash; Stable Grasp (Success)</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="column is-one-third has-text-centered">
-        <h3 class="title is-5">RETAF (Ours)</h3>
+
+      <div class="comparison-row">
+        <h4 class="title is-5">Cross-Robot Generalization: SO-ARM101</h4>
+        <p class="generalization-note">
+          Note: the TF-Gripper is relatively heavy for the SO-ARM101, which can lead to overheating
+          and jitter during operation. We therefore recommend mounting it on an arm with a larger payload.
+        </p>
+        <div class="columns is-centered comparison-videos">
+          <div class="column is-two-thirds">
+            <div class="video-frame">
+              <video controls playsinline>
+                <source src="./static/videos_2/TF_Gripper_SOARM101.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="has-text-centered method-label">
+              TF-Gripper mounted on a teleoperated SO-ARM101 arm, with grasping force predicted by RETAF
+              (trained only on the Franka chip-picking setup).
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="comparison-grid comparison-videos">
+
+    <!-- Sub-section: Per-Task Comparison -->
+    <div class="comparison-subsection">
+      <div class="has-text-centered">
+        <h3 class="title is-4">Per-Task Comparison</h3>
+        <p class="subtitle is-6">DP w/ width vs DP w/ force vs RETAF (Ours) across four manipulation tasks.</p>
+      </div>
+      <div class="columns is-centered comparison-header">
+        <div class="column is-one-third has-text-centered">
+          <h3 class="title is-5">DP w/ width</h3>
+        </div>
+        <div class="column is-one-third has-text-centered">
+          <h3 class="title is-5">DP w/ force</h3>
+        </div>
+        <div class="column is-one-third has-text-centered">
+          <h3 class="title is-5">RETAF (Ours)</h3>
+        </div>
+      </div>
+      <div class="comparison-grid comparison-videos">
       <div class="comparison-row">
         <h4 class="title is-5">Tofu Grasping</h4>
         <div class="columns is-variable is-4 is-multiline">
@@ -441,6 +514,7 @@ We hope this work opens a path for scaling the learning of force-controlled poli
             <p class="has-text-centered method-label">RETAF (Ours)</p>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>
