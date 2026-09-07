@@ -1,175 +1,792 @@
-/* Custom styles for full-screen video background */
+/* ==========================================================================
+   Site-wide tokens
+   ========================================================================== */
+:root {
+  --accent: #2f6fb5;
+  --accent-soft: rgba(47, 111, 181, 0.10);
+  --text: #363636;
+  --text-muted: #5c6672;
+  --surface: #ffffff;
+  --surface-alt: #f7f8fa;
+  --border: rgba(20, 30, 40, 0.08);
+  --shadow-card: 0 2px 6px rgba(20, 30, 40, 0.04), 0 10px 24px rgba(20, 30, 40, 0.07);
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --font-sans: 'Inter', 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body, html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
+body {
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.title, .subtitle, .publication-title, .publication-authors, .teaser, .button {
+  font-family: var(--font-sans);
+}
+
+.title {
+  letter-spacing: -0.015em;
+}
+
+code, pre, tt {
+  font-family: var(--font-mono);
+}
+
+img, video {
+  max-width: 100%;
+}
+
+/* ==========================================================================
+   Full-screen video landing
+   ========================================================================== */
 .full-page-image {
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    width: 100%;
-    position: relative;
-}
-
-.overlay {
-    /* Add a semi-transparent overlay to the video */
-    background-color: rgba(0, 0, 0, 0.3);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 2;
-}
-
-.first-page-title {
-    /* Center content vertically and horizontally */
-    position: absolute;
-    bottom: 10%;
-    z-index: 3;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #0d1b2a;
+  overflow: hidden;
 }
 
 #bg-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1.0s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease;
 }
 
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.35) 40%, rgba(0, 0, 0, 0.15) 100%);
+}
+
+.first-page-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 11%;
+  z-index: 3;
+  color: #fff;
+  padding: 0 1.5rem;
+}
+
+.first-page-inner {
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+.hero-stats {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 2.25rem;
+}
+
+.hero-stats li {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.hero-stats strong {
+  color: #fff;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.hero-stats span {
+  margin-top: 0.15rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.72);
+  letter-spacing: 0.02em;
+}
+
+.first-page-main-title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.75rem;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
+.first-page-sub-title {
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+}
+
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 1.5rem;
+  z-index: 3;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1.25rem;
+  animation: scroll-bob 2s ease-in-out infinite;
+}
+
+.scroll-hint:hover {
+  color: #fff;
+}
+
+@keyframes scroll-bob {
+  0%, 100% { transform: translate(-50%, 0); }
+  50%      { transform: translate(-50%, 6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .scroll-hint { animation: none; }
+}
+
+/* ==========================================================================
+   Sticky section nav
+   ========================================================================== */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-nav-inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0.55rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.site-nav-brand {
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.site-nav-links {
+  display: flex;
+  gap: 0.25rem;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.site-nav-links::-webkit-scrollbar { display: none; }
+
+.site-nav-links a {
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.site-nav-links a:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.site-nav-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.site-nav-actions .button {
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Paper header
+   ========================================================================== */
+.publication-title {
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  max-width: 52rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.publication-authors {
+  line-height: 1.7;
+}
+
+.publication-authors a {
+  color: var(--accent) !important;
+}
+
+.publication-authors tt {
+  font-size: 0.9em;
+  color: var(--text-muted);
+}
+
+.university-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+.university-logos .logo-uva { height: 56px; }
+.university-logos .logo-columbia { height: 38px; }
+
+.publication-links {
+  margin-top: 0.5rem;
+}
+
+.publication-links .button {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.publication-links .button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.publication-links .button.is-coming-soon {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Sections & headings
+   ========================================================================== */
+.section.is-alt {
+  background: var(--surface-alt);
+}
+
+.section > .container > .title,
+.section > .container > .has-text-centered > .title.is-3 {
+  position: relative;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.section > .container > .title::after,
+.section > .container > .has-text-centered > .title.is-3::after {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent);
+  margin: 0.75rem auto 0;
+}
+
+.section > .container > .has-text-centered > .title.is-3 + .subtitle {
+  margin-top: -0.75rem;
+  color: var(--text-muted);
+}
+
+.section-kicker {
+  margin: 0 0 0.35rem;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-lead {
+  max-width: 40rem;
+  margin: 0 auto;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.has-text-accent {
+  color: var(--accent) !important;
+}
+
+/* ==========================================================================
+   Teaser, intro video, figures
+   ========================================================================== */
+.teaser .interpolation-image {
+  border-radius: var(--radius-md);
+  display: block;
+  margin: 0 auto;
+}
+
+.intro-video {
+  width: 100%;
+  max-width: 960px;
+  display: block;
+  margin: 0 auto;
+  border-radius: var(--radius-md);
+  background: #0d1b2a;
+  box-shadow: var(--shadow-card);
+}
+
+.figure-image {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 0.5rem;
+}
+
+.figure-link {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.figure-link a {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.figure-link a:hover {
+  text-decoration: underline;
+}
+
+/* Abstract */
+.content.has-text-justified p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  hyphens: auto;
+}
+
+/* ==========================================================================
+   Video gallery cards
+   ========================================================================== */
 .video-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+  display: grid;
+  gap: 1.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  align-items: stretch;
+  margin-top: 2rem;
+}
+
+.video-gallery figure {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 0.85rem 0.85rem 1.25rem;
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
 }
 
 .video-frame {
-    border-radius: 15px;
-    overflow: hidden;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #0d1b2a;
 }
 
 .video-frame video {
-    width: 100%;
-    height: auto;
-    display: block;
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
-.task-video-gallery .video-frame {
-    padding-top: 0;
-    position: relative;
+/* Only galleries that mix portrait and landscape clips get a fixed frame. */
+.video-gallery.is-mixed-ratio .video-frame {
+  aspect-ratio: 4 / 3;
 }
 
-.task-video-gallery video {
-    position: static;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
+.video-gallery.is-mixed-ratio .video-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* cropped preview in-page; fullscreen shows the full clip */
+}
+
+.video-gallery.is-mixed-ratio .is-portrait-clip video {
+  object-position: 50% 20%;
+}
+
+.video-gallery figcaption {
+  margin: auto auto 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 28rem;
+}
+
+/* ==========================================================================
+   Policy comparison
+   ========================================================================== */
+.task-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1.25rem auto 0;
+}
+
+.task-tab {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.task-tab:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.task-tab.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* The active tab already names the task, so hide the repeated card title. */
+.task-panel > .title {
+  display: none;
 }
 
 .comparison-header {
-    margin-top: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+}
+
+.comparison-header .title {
+  margin-bottom: 0;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.comparison-header .title.has-text-accent {
+  color: var(--accent);
 }
 
 .comparison-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin-top: 1rem;
 }
 
 .comparison-row {
-    padding: 1.25rem;
-    border-radius: 16px;
-    background: #ffffff;
-    box-shadow: 0 18px 36px rgba(32, 43, 54, 0.12);
+  padding: 1.25rem 1.25rem 1rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
 }
 
 .comparison-row .title {
-    margin-bottom: 0.75rem;
+  margin-bottom: 0.9rem;
 }
 
-.comparison-videos .video-frame {
-    border-radius: 12px;
-    overflow: hidden;
-    background: #0d1b2a;
+.comparison-row .columns:last-child {
+  margin-bottom: 0;
 }
 
-.comparison-videos video {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
+/* Fixed frame ratios so the layout does not jump while videos load. */
+.comparison-grid .video-frame {
+  aspect-ratio: 32 / 33;
+}
+
+.comparison-row > .comparison-videos .video-frame {
+  aspect-ratio: 16 / 9;
+}
+
+.comparison-grid .video-frame video,
+.comparison-row > .comparison-videos .video-frame video {
+  width: 100%;
+  height: 100%;
 }
 
 .method-label {
-    margin-top: 0.5rem;
-    font-weight: 600;
-    color: #4a5568;
-    font-size: 0.9rem;
-    padding: 0.25rem 0.5rem;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 6px;
-    display: block;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 0.6rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+  padding: 0.3rem 0.6rem;
+  background: var(--surface-alt);
+  border-radius: 6px;
+  display: block;
+  text-align: center;
+}
+
+.method-label.is-ours {
+  color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .comparison-subsection {
-    margin-top: 2.5rem;
+  margin-top: 2.5rem;
 }
 
 .comparison-subsection + .comparison-subsection {
-    margin-top: 3.5rem;
-    padding-top: 2.5rem;
-    border-top: 1px solid rgba(32, 43, 54, 0.12);
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.comparison-subsection > .has-text-centered {
+  margin-bottom: 1.5rem;
+}
+
+.comparison-subsection .subtitle {
+  color: var(--text-muted);
 }
 
 .comparison-subsection .comparison-row {
-    margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
 }
 
 .comparison-subsection .comparison-row:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .generalization-figure {
-    margin: 0 auto 1.5rem;
-    max-width: 360px;
-    text-align: center;
+  margin: 0 auto 1.5rem;
+  max-width: 360px;
+  text-align: center;
 }
 
 .generalization-figure img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  display: block;
 }
 
 .generalization-figure figcaption {
-    margin-top: 0.75rem;
-    font-size: 0.9rem;
-    color: #4a4a4a;
-    line-height: 1.5;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
 }
 
 .generalization-note {
-    margin: 0 auto 1rem;
-    max-width: 46rem;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: #8a5a00;
-    background-color: rgba(255, 184, 0, 0.12);
-    border-left: 3px solid rgba(255, 184, 0, 0.7);
-    border-radius: 6px;
-    padding: 0.6rem 0.9rem;
-    text-align: left;
+  margin: 0 auto 1rem;
+  max-width: 46rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #7a4f00;
+  background-color: rgba(255, 184, 0, 0.12);
+  border-left: 3px solid rgba(255, 184, 0, 0.7);
+  border-radius: 6px;
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+}
+
+/* ==========================================================================
+   Beyond force regulation
+   ========================================================================== */
+.task-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2.25rem;
+}
+
+.task-group {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 1.75rem;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem;
+}
+
+.task-group-header .title {
+  margin: 0.6rem 0 0.5rem;
+}
+
+.task-group-header p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.task-tag {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.task-tag.is-contact {
+  color: #9a3412;
+  background: rgba(234, 88, 12, 0.12);
+}
+
+.task-tag.is-everyday {
+  color: #166534;
+  background: rgba(22, 163, 74, 0.12);
+}
+
+.task-videos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.task-videos figure {
+  margin: 0;
+}
+
+.task-videos .video-frame video {
+  width: 100%;
+  height: 100%;
+}
+
+.task-videos.is-portrait .video-frame {
+  aspect-ratio: 3 / 4;
+}
+
+.task-videos.is-portrait .video-frame video {
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+
+.task-videos.is-landscape .video-frame {
+  aspect-ratio: 16 / 9;
+}
+
+.task-videos figcaption {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   BibTeX & footer
+   ========================================================================== */
+pre.bibtex {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+.footer {
+  background: var(--surface-alt);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 1.75rem 1.5rem;
+}
+
+.footer-credit {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.footer-credit a {
+  color: var(--accent);
+}
+
+.footer-credit a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Small screens
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+  .full-page-image {
+    height: 80vh;
+  }
+
+  .first-page-title {
+    bottom: 14%;
+  }
+
+  .publication-title {
+    font-size: 1.85rem;
+  }
+
+  .university-logos {
+    gap: 1.5rem;
+  }
+
+  .video-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-header {
+    display: none;
+  }
+
+  .task-tab {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.85rem;
+  }
+
+  .site-nav-actions {
+    display: none;
+  }
+
+  .hero-stats {
+    gap: 0.5rem 1.25rem;
+  }
+
+  .hero-stats strong {
+    font-size: 1.1rem;
+  }
+
+  .task-group {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem;
+  }
+
+  .comparison-row {
+    padding: 1rem;
+  }
 }
