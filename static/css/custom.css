@@ -277,12 +277,6 @@ img, video {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
 }
 
-.publication-links .button.is-coming-soon {
-  opacity: 0.5;
-  cursor: default;
-  pointer-events: none;
-}
-
 /* ==========================================================================
    Sections & headings
    ========================================================================== */
