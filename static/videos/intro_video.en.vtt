@@ -1,0 +1,88 @@
+WEBVTT
+
+00:00:00.600 --> 00:00:01.446
+Hello everyone.
+
+00:00:01.446 --> 00:00:06.920
+This video shows our TF-Gripper, rollouts of our RETAF model, and comparisons with the baselines.
+
+00:00:08.520 --> 00:00:11.795
+Our gripper uses force control and is driven by a timing belt.
+
+00:00:11.795 --> 00:00:13.960
+The two fingers can be driven separately.
+
+00:00:17.620 --> 00:00:19.853
+Our gripper has very low control latency.
+
+00:00:19.853 --> 00:00:22.740
+This helps when an AI model controls it in real time.
+
+00:00:27.060 --> 00:00:30.491
+Our gripper can be mounted on robot arms of different models.
+
+00:00:30.491 --> 00:00:34.260
+In this video we only change the adaptor to fit it on a KUKA robot.
+
+00:00:35.860 --> 00:00:38.987
+We use our device to teleoperate the robot and control the force.
+
+00:00:38.987 --> 00:00:42.740
+With a very small force, it picks up a potato chip and places it in the plate.
+
+00:00:49.130 --> 00:00:53.656
+Here we compare our RETAF model with a pure diffusion policy using force and using width.
+
+00:00:53.656 --> 00:00:56.250
+RETAF succeeds, while the baselines crush the chip.
+
+00:00:59.100 --> 00:01:04.500
+On the liquid transfer task, RETAF transfers the liquid successfully, while the baseline fails.
+
+00:01:08.980 --> 00:01:15.180
+When grasping tofu, RETAF uses tactile sensing to judge the force more accurately, and picks the tofu up successfully.
+
+00:01:17.020 --> 00:01:20.260
+We train on four kinds of potato chips and evaluate on two different kinds.
+
+00:01:20.260 --> 00:01:25.660
+Diffusion policy with force control does not work well in distribution, and it does not work well out of distribution either.
+
+00:01:27.290 --> 00:01:30.904
+But RETAF works well both in distribution and out of distribution.
+
+00:01:30.904 --> 00:01:32.930
+This shows its strong generalization.
+
+00:01:41.670 --> 00:01:46.039
+We put our TF-Gripper and the trained RETAF model directly on an SO-ARM robot arm.
+
+00:01:46.039 --> 00:01:51.580
+We teleoperate the robot to pick up a potato chip and let RETAF control the force, and it also succeeds.
+
+00:01:51.580 --> 00:01:54.990
+This shows the generalization of both our gripper and our model.
+
+00:01:56.590 --> 00:01:59.525
+TF-Gripper and RETAF also work on contact-rich tasks.
+
+00:01:59.525 --> 00:02:03.070
+They perform better than a diffusion policy that controls force.
+
+00:02:08.190 --> 00:02:11.353
+TF-Gripper is not only for force-regulated manipulation.
+
+00:02:11.353 --> 00:02:13.839
+It can also be used for many everyday tasks.
+
+00:02:13.839 --> 00:02:16.550
+This shows its value for the robotics community.
+
+00:02:21.190 --> 00:02:27.057
+In summary, TF-Gripper enables robot learning for force-regulated manipulation, and works across diverse tasks.
+
+00:02:27.057 --> 00:02:34.614
+RETAF outperforms the baselines on force-regulated tasks, generalizes to unseen objects, and transfers to a new robot with the same TF-Gripper.
+
+00:02:34.614 --> 00:02:35.830
+Thank you for watching.
